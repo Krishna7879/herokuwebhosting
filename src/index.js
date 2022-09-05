@@ -1,4 +1,4 @@
-
+const port=process.env.PORT || 8000
 const express=require('express')
 const path=require('path')
 const hbs=require('hbs')
@@ -11,8 +11,10 @@ const auth=require('../src/middlewares/auth')
 const cookieparser=require('cookie-parser')
 const staticPath=path.join(__dirname,'../public')
 const partialpath=path.join(__dirname,'../templates/partials')
+const viewspath=path.join(__dirname,'../templates/views')
 app.use(express.static(staticPath))
-app.set('views','../templates/views')
+console.log(partialpath)
+app.set('views',viewspath)
 app.set('view engine','hbs')
 
 hbs.registerPartials(partialpath)
@@ -85,6 +87,6 @@ app.post('/login',async(req,res)=>{
 })
 
 
-app.listen(8000,'127.0.0.1',()=>{
+app.listen(port,()=>{
     console.log('hey server is running')
 })
